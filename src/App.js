@@ -1,8 +1,7 @@
 import './App.css';
-import './Checkbox';
-import './SearchBox';
-import Framework from "./Framework";
+import Framework from "./component/Framework";
 import React from "react";
+import {Route, Switch} from 'react-router-dom'
 
 function App() {
     const PRODUCTS = [
@@ -15,9 +14,17 @@ function App() {
     ];
 
     return (
-        <div className='App'>
+        <Switch>
+            <Route path='/' exact>
+                home
+            </Route>
+            <Route path='/about'>
+                about
+            </Route>
+            <Route>
             <Framework data={PRODUCTS}/>
-        </div>
+            </Route>
+        </Switch>
     );
 }
 

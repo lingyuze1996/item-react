@@ -3,11 +3,25 @@ import CategoryRow from "./CategoryRow";
 import ProductRow from "./ProductRow";
 
 class ProductTable extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+
     render() {
         const rows = [];
         let lastCategory = null;
+        const inStockOnly = this.props.inStockOnly
+        const filterText = this.props.filterText
 
         this.props.data.forEach((product) => {
+            if (!product.stocked && inStockOnly) {
+                return
+            }
+
+            if (product.name.indexOf(filterText) === -1) {
+                return
+            }
+
             if (product.category !== lastCategory) {
                 rows.push(
                     <CategoryRow category={product.category} />
@@ -32,10 +46,6 @@ class ProductTable extends React.Component {
                 <tbody>{rows}</tbody>
             </table>
         )
-    }
-
-    constructor(props) {
-        super(props);
     }
 }
 
